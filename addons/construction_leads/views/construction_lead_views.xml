@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_construction_lead_tree" model="ir.ui.view">
+            <field name="name">construction.lead.tree</field>
+            <field name="model">construction.lead</field>
+            <field name="arch" type="xml">
+                <tree string="Leads de Construcción">
+                    <field name="name"/>
+                    <field name="phone_number"/>
+                    <field name="email"/>
+                    <field name="lead_origin"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_construction_lead_form" model="ir.ui.view">
+            <field name="name">construction.lead.form</field>
+            <field name="model">construction.lead</field>
+            <field name="arch" type="xml">
+                <form string="Lead de Construcción">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="phone_number"/>
+                                <field name="email"/>
+                                <field name="cedula_number"/>
+                            </group>
+                            <group>
+                                <field name="preferred_contact_method"/>
+                                <field name="lead_origin"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Perfilamiento">
+                                <group>
+                                    <field name="project_of_interest"/>
+                                    <field name="salary_range"/>
+                                    <field name="contract_type"/>
+                                </group>
+                            </page>
+                            <page string="Notas">
+                                <field name="customer_note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_construction_lead" model="ir.actions.act_window">
+            <field name="name">Leads de Construcción</field>
+            <field name="res_model">construction.lead</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea un nuevo lead de construcción
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem
+            id="menu_construction_root"
+            name="Leads de Construcción"
+            sequence="10"/>
+
+        <menuitem
+            id="menu_construction_lead"
+            name="Leads"
+            parent="menu_construction_root"
+            action="action_construction_lead"
+            sequence="10"/>
+
+    </data>
+</odoo>
